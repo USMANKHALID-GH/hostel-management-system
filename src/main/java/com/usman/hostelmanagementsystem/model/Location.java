@@ -24,6 +24,7 @@ public class Location  extends AbstractModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
+    @Column(nullable = false)
     @Embedded
     private Address  address;
 }

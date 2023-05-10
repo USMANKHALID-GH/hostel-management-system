@@ -24,10 +24,12 @@ public class Room extends AbstractModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @Column(nullable = false)
     private String roomNumber;
-    private  int  roomCapacity;
+    @Column(nullable = false,length = 4)
+    private  int  roomCapacity=0;
     private  boolean isReady;
-    private  int numberOfBed;
+
     private  Integer floorNumber;
 
 

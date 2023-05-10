@@ -26,13 +26,21 @@ public class Parent extends AbstractModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private   String surname;
+    @Column(nullable = false)
     private   Integer   identtyNumber;
     private boolean isActive;
+    @Column(nullable = false)
     private String  image;
+    @Column(nullable = false)
     private  Integer  telefon;
+    @Column(nullable = false)
     private   String email;
+    @Column(nullable = false)
     private String  gender;
+    @Column(nullable = false)
     private Date dateOfbBirth;
 }

@@ -25,11 +25,15 @@ public class Hostel  extends AbstractModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
+    @Column(nullable = false)
     private boolean isMixed;
+    @Column(nullable = false)
     private String name;
+
     private String image;
     private String aboutHostel;
 
+    @Column(nullable = false)
     @OneToOne
     private Location location;
 

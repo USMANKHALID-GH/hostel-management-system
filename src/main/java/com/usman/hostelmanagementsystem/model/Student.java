@@ -44,7 +44,7 @@ public class Student extends AbstractModel {
     private String course;
     private String  gender;
     private Date   dateOfbBirth;
-
+    private  int numberNumber;
     @ManyToOne
     private Room room;
     @Embedded
