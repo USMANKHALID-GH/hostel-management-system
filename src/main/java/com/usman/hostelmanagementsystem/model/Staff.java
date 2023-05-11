@@ -1,6 +1,7 @@
 package com.usman.hostelmanagementsystem.model;
 
 import jakarta.persistence.Embedded;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
@@ -8,9 +9,9 @@ import org.hibernate.annotations.*;
 import java.util.Date;
 
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -28,15 +29,24 @@ public class Staff extends AbstractModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private  Long id;
+    @NotNull(message = "Staff first name cant be empty")
+    @Column(nullable = false)
     private String firstName;
+    @NotNull(message = "Staff second name cant be empty")
+    @Column(nullable = false)
     private   String surname;
-    private   Integer   tc;
-    private String country;
-    private boolean isActive;
+    @NotNull(message = "Staff Tc cant be empty")
+    @Column(nullable = false)
+    private   Integer   identityNumber;
+
+    private boolean isActive=false;
     private String  image;
+    @Column(nullable = false, unique = true)
     private  Integer  telefon;
+    @Column(nullable = false, unique = true)
     private   String email;
     private boolean isDisabled;
+    @Column(nullable = false)
     private String  gender;
     private Date dateOfbBirth;
     private  String qualificaation;
@@ -44,4 +54,7 @@ public class Staff extends AbstractModel{
 
     @Embedded
     private Address  address;
+
+    @ManyToOne
+    private  Hostel hostel;
 }

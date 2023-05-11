@@ -2,16 +2,16 @@ package com.usman.hostelmanagementsystem.model;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
 
 import java.util.Date;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -33,7 +33,6 @@ public class Student extends AbstractModel {
     private   String surname;
     private   Integer   tc;
     private Integer  studentNumber;
-    private String country;
     private boolean isActive;
     private boolean isGuest;
     private String  image;
@@ -45,12 +44,17 @@ public class Student extends AbstractModel {
     private String  gender;
     private Date   dateOfbBirth;
     private  int numberNumber;
+
+
     @ManyToOne
     private Room room;
+    private  int bedNumber;
     @Embedded
     private Address  address;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(nullable = true)
     private  Parent  parent;
+
 
 }

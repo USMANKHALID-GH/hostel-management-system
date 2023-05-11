@@ -4,9 +4,10 @@ package com.usman.hostelmanagementsystem.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 
 @Data
@@ -16,7 +17,6 @@ import javax.persistence.Table;
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Where(clause = "deleted = false")
 @Table(name = "hostel")
 public class Hostel  extends AbstractModel {
     private static final long serialVersionUID = 1L;
@@ -27,14 +27,17 @@ public class Hostel  extends AbstractModel {
     private  Long Id;
     @Column(nullable = false)
     private boolean isMixed;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
+    @Column(nullable = false)
+    private String gender;
 
     private String image;
     private String aboutHostel;
 
-    @Column(nullable = false)
-    @OneToOne
+
+    @OneToOne(orphanRemoval = true,optional = false,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false, unique = true)
     private Location location;
 
 }

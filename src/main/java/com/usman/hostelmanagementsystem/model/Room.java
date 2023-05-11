@@ -1,13 +1,13 @@
 package com.usman.hostelmanagementsystem.model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
+import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+@Validated
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(sql = "UPDATE room SET deleted=true WHERE id=?")
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Where(clause = "deleted = false")
-@Table(name = "roomm")
+@Table(name = "room")
 public class Room extends AbstractModel{
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class Room extends AbstractModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String roomNumber;
     @Column(nullable = false,length = 4)
     private  int  roomCapacity=0;
@@ -32,6 +32,8 @@ public class Room extends AbstractModel{
 
     private  Integer floorNumber;
 
+    private  String roomType;
 
+    @ManyToOne
     private Hostel hostel;
 }
