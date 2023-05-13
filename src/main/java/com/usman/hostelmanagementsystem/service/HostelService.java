@@ -1,9 +1,10 @@
 package com.usman.hostelmanagementsystem.service;
 
-import com.usman.hostelmanagementsystem.dto.HostelDto;
 import com.usman.hostelmanagementsystem.model.Hostel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface HostelService {
 
@@ -13,5 +14,7 @@ public interface HostelService {
     Page<Hostel> getAllHostel(Pageable pageable);
 
     Hostel findById(long id);
+
+    Page<Hostel> getByGender(String gender,  Pageable pageable);
 
 }

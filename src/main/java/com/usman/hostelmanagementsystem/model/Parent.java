@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
 
 
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.Date;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -17,12 +19,10 @@ import jakarta.persistence.Table;
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Where(clause = "deleted = false")
+
 @Table(name = "paarent")
 public class Parent extends AbstractModel {
     private static final long serialVersionUID = 1L;
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
@@ -31,16 +31,15 @@ public class Parent extends AbstractModel {
     @Column(nullable = false)
     private   String surname;
     @Column(nullable = false)
-    private   Integer   identtyNumber;
-    private boolean isActive;
+    private String  identityNumber;
     @Column(nullable = false)
     private String  image;
     @Column(nullable = false)
-    private  Integer  telefon;
+    private  String   telefon;
     @Column(nullable = false)
     private   String email;
     @Column(nullable = false)
     private String  gender;
     @Column(nullable = false)
-    private Date dateOfbBirth;
+    private LocalDate dateOfBirth;
 }

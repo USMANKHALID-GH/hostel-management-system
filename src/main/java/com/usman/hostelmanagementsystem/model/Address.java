@@ -19,6 +19,6 @@ public class Address {
     private String streetCode;
     @Column(nullable = false)
     private  String apartmentName;
-    private  int apartmentNO;
+    private  int apartmentNo;
 
 }

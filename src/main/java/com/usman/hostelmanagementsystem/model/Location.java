@@ -15,11 +15,10 @@ import jakarta.persistence.Table;
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Where(clause = "deleted = false")
+
 @Table(name = "location")
 public class Location  extends AbstractModel{
     private static final long serialVersionUID = 1L;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,7 +8,7 @@ public interface StaffService {
 
     public  void registerStaff(Staff staff);
 
-    public  void approveStudent(long studnetId);
+    public  void approveStudent(long studnetId,long bedId);
 
 
     public  void updateStaff(long id);
@@ -20,6 +20,8 @@ public interface StaffService {
     public void changePosition(long id);
 
     public  Staff getByEmailOrTc(String email, Integer tc);
+
+    Staff getStaffById(long id);
 
 
 }

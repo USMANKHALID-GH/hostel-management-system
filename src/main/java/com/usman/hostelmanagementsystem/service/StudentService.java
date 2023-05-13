@@ -19,7 +19,7 @@ public interface StudentService {
 
     public  void deactivateStudent(long id);
 
-    public Page<Student>  getAllStudent(Pageable pageable);
+    Page<Student>  getAllStudent(Pageable pageable);
 
 
     public  void changeRoom(long StudentId,  long roomId, int bedNumber);

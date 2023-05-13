@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Where(clause = "deleted = false")
+
 @Table(name = "staff")
 public class Staff extends AbstractModel{
     private static final long serialVersionUID = 1L;

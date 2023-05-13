@@ -1,11 +1,15 @@
 package com.usman.hostelmanagementsystem.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
 
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -20,7 +24,7 @@ import jakarta.persistence.Table;
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Where(clause = "deleted = false")
+
 @Table(name = "student")
 public class Student extends AbstractModel {
     private static final long serialVersionUID = 1L;
@@ -29,21 +33,24 @@ public class Student extends AbstractModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private   String surname;
-    private   Integer   tc;
-    private Integer  studentNumber;
+    @Column(nullable = false,length = 11)
+    private String  tc;
+    private String   studentNumber;
     private boolean isActive;
     private boolean isGuest;
     private String  image;
-    private  Integer  telefon;
+    private  String   telefon;
+    @Email
     private   String email;
     private boolean isDisabled;
     private  String department;
     private String course;
     private String  gender;
-    private Date   dateOfbBirth;
-    private  int numberNumber;
+    private LocalDate dateOfBirth;
 
 
     @ManyToOne
@@ -52,8 +59,7 @@ public class Student extends AbstractModel {
     @Embedded
     private Address  address;
 
-    @ManyToOne
-    @JoinColumn(nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private  Parent  parent;
 
 

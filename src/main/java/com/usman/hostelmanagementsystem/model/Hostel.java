@@ -1,6 +1,8 @@
 package com.usman.hostelmanagementsystem.model;
 
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
@@ -28,13 +30,16 @@ public class Hostel  extends AbstractModel {
     @Column(nullable = false)
     private boolean isMixed;
     @Column(nullable = false, unique = true)
+    @NotNull(message = "name cant be null")
+    @NotEmpty(message = "name cant be empty")
     private String name;
     @Column(nullable = false)
+    @NotNull(message = "gender cant be null")
+    @NotEmpty(message = "gender cant be empty")
     private String gender;
 
     private String image;
     private String aboutHostel;
-
 
     @OneToOne(orphanRemoval = true,optional = false,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, unique = true)

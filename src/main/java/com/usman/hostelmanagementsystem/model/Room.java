@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 @Validated
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -15,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Where(clause = "deleted = false")
+
 @Table(name = "room")
 public class Room extends AbstractModel{
     private static final long serialVersionUID = 1L;
@@ -36,4 +38,7 @@ public class Room extends AbstractModel{
 
     @ManyToOne
     private Hostel hostel;
+
+    @OneToMany(mappedBy = "room")
+    private List<Bed> bed;
 }
