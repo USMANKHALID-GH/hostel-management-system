@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 
@@ -37,7 +38,7 @@ public class Staff extends AbstractModel{
     private   String surname;
     @NotNull(message = "Staff Tc cant be empty")
     @Column(nullable = false)
-    private   Integer   identityNumber;
+    private BigInteger identityNumber;
 
     private boolean isActive=false;
     private String  image;

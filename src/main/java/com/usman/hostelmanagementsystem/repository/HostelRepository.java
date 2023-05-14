@@ -20,5 +20,9 @@ public interface HostelRepository  extends JpaRepository<Hostel, Long> {
     @Query("from Hostel a where a.gender=:gender")
     Page<Hostel> findHostelByGender(@Param("gender") String gender, Pageable pageable);
 
+    Page<Hostel>  findHostelByNameContainingIgnoreCase(String name, Pageable pageable);
+
+
+
 
 }

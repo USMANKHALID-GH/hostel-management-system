@@ -6,7 +6,7 @@ import lombok.Data;
 public class RoomDto extends BaseDto {
     private Long Id;
     private String roomNumber;
-    private  int  roomCapacity=0;
+    private  int  roomCapacity;
     private  boolean isReady;
     private  Integer floorNumber;
     private  String roomType;

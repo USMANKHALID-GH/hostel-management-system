@@ -31,5 +31,6 @@ public class StudentDto extends BaseDto {
     private Room room;
     private Address address;
     private Parent parent;
+    private BedDto bed;
 
 }

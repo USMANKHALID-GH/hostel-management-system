@@ -27,6 +27,7 @@ public class Bed extends AbstractModel{
     @Column(nullable = false)
     private int bedNumber;
     private boolean isOccupied;
+    private  boolean isReady;
 
     @ManyToOne
     private Room room;

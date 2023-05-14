@@ -25,6 +25,9 @@ public abstract class AbstractModel implements Serializable {
     @Column(name = "created_date",updatable = false)
     private LocalDateTime createdDate;
 
+    @JsonIgnore
+    private boolean deleted=false;
+
 
     @PrePersist
     private void perPersist(){

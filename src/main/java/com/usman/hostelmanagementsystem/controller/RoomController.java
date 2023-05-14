@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class RoomController {
     private final RoomService service;
     private final RoomMapper mapper;
+
     @PostMapping("/hostel/{hostelId}")
-    public ResponseEntity<ResponseDto> saveHostel(@RequestBody RoomDto dto, @PathVariable long hostelId){
+    public ResponseEntity<ResponseDto> saveRoom(@RequestBody RoomDto dto, @PathVariable long hostelId){
         service.saveRoom(mapper.toEntity(dto),hostelId);
         return ResponseEntity.ok(ResponseDto.builder().message("room saved").build());
     }
@@ -31,9 +32,9 @@ public class RoomController {
     }
 
     @PostMapping("/make-room-read/{id}")
-    public ResponseEntity<ResponseDto> saveHostel(@PathVariable("id") long id){
+    public ResponseEntity<ResponseDto> makeRoomReady(@PathVariable("id") long id){
         service.setRoomReady(id);
-        return ResponseEntity.ok(ResponseDto.builder().message("Hostel saved").build());
+        return ResponseEntity.ok(ResponseDto.builder().message("Room saved").build());
     }
 
     @GetMapping("/{id}")
@@ -44,5 +45,11 @@ public class RoomController {
     @GetMapping("/room-number/{roomNumber}")
     public ResponseEntity<RoomDto> getRoomByNumber(@PathVariable String roomNumber){
         return ResponseEntity.ok(mapper.toDto(service.findRoomByRoomNumber(roomNumber)));
+    }
+
+    @PutMapping("/make-room-not-ready/{id}")
+    public ResponseEntity<ResponseDto> updateRoom(@PathVariable("id") long id){
+        service.UpdateRoom(id);
+        return ResponseEntity.ok(ResponseDto.builder().message("Room updated").build());
     }
 }

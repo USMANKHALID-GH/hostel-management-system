@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 @Slf4j
 @Service
@@ -21,6 +22,17 @@ public class HostelServiceImpl  implements HostelService {
 
     @Override
     public void saveHostel(@Valid  Hostel hostel) {
+
+        if(ObjectUtils.isEmpty(hostel.getGender())){
+            throw  new BusinessException(HttpStatus.FORBIDDEN, "Hostel Type  MUST BE PROVIVED");
+        }
+        if(ObjectUtils.isEmpty(hostel.getName())){
+            throw  new BusinessException(HttpStatus.FORBIDDEN, "Hostel NAME MUST BE PROVIVED");
+        }
+        if(ObjectUtils.isEmpty(hostel.isMixed())){
+            throw  new BusinessException(HttpStatus.FORBIDDEN, "Is mixed  MUST BE indicated");
+        }
+
         hostelRepository.save(hostel);
     }
 
@@ -30,8 +42,12 @@ public class HostelServiceImpl  implements HostelService {
     }
 
     @Override
-    public Page<Hostel> getAllHostel(Pageable pageable) {
+    public Page<Hostel> getAllHostel(String name,Pageable pageable) {
+        if(ObjectUtils.isEmpty(name)){
         return hostelRepository.findAll(pageable);
+    }
+    return  hostelRepository.findHostelByNameContainingIgnoreCase(name, pageable);
+
     }
 
     @Override
@@ -44,5 +60,27 @@ public class HostelServiceImpl  implements HostelService {
     @Override
     public Page<Hostel> getByGender(String gender, Pageable pageable) {
         return hostelRepository.findHostelByGender(gender,pageable);
+    }
+
+    @Override
+    public void updateHostel(Hostel hostel, long id) {
+        Hostel oldHostel= findById(id);
+        if(ObjectUtils.isEmpty(hostel.getGender())){
+            oldHostel.setGender(hostel.getGender());
+        }
+        if(ObjectUtils.isEmpty(hostel.getName())){
+            oldHostel.setName(hostel.getName());
+        }
+        if(ObjectUtils.isEmpty(hostel.isMixed())){
+           oldHostel.setMixed(hostel.isMixed());
+        }
+        if(ObjectUtils.isEmpty(hostel.getAboutHostel())){
+            oldHostel.setAboutHostel(hostel.getAboutHostel());
+        }
+        if(ObjectUtils.isEmpty(hostel.getImage())){
+            oldHostel.setImage(hostel.getImage());
+        }
+
+        hostelRepository.save(oldHostel);
     }
 }

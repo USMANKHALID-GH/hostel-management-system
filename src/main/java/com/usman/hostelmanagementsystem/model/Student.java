@@ -8,9 +8,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
 
-import java.math.BigInteger;
+
 import java.time.LocalDate;
-import java.util.Date;
+
 
 import jakarta.persistence.*;
 
@@ -20,6 +20,7 @@ import jakarta.persistence.Table;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(sql = "UPDATE student SET deleted=true WHERE id=?")
+
 @Entity
 @DynamicInsert
 @DynamicUpdate
@@ -62,5 +63,7 @@ public class Student extends AbstractModel {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private  Parent  parent;
 
+    @OneToOne
+    private Bed bed;
 
 }

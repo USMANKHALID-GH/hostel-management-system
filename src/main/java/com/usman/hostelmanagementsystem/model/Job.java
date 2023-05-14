@@ -9,24 +9,30 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 @Validated
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SQLDelete(sql = "UPDATE fees SET deleted=true WHERE id=?")
+@SQLDelete(sql = "UPDATE job SET deleted=true WHERE id=?")
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 
-@Table(name = "fees")
-public class Fees  extends AbstractModel{
+@Table(name = "job")
+public class Job extends  AbstractModel{
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long Id;
-    private long studentId;
-    private LocalDate monthAndYear;
-    private Double amount;
+    private  Long id;
+    private String name;
+    private String description;
+
+    @ManyToMany
+    @JoinTable(name = "job_staff", joinColumns = @JoinColumn(name = "job_id")
+    ,inverseJoinColumns = @JoinColumn(name = "staff_id")
+    )
+    private List<Staff> staff;
 }

@@ -1,28 +1,32 @@
 package com.usman.hostelmanagementsystem.service;
 
-import com.usman.hostelmanagementsystem.dto.RegisterDto;
+
 import com.usman.hostelmanagementsystem.model.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface StudentService {
 
-    public  void  register(Student register);
+      void  register(Student register);
 
-    public Student  getStudentByEmailORTc(String email, Integer tc);
+     Student  getStudentByEmailORTc(String email, String tc);
 
-    public  Student findStudentById(long id);
+      Student findStudentById(long id);
 
-    public  void updateStudent(Integer tc);
+      void updateStudent(Student student,long id);
 
-    public   void deleteStudent(long id);
+       void deleteStudent(long id);
 
-    public  void deactivateStudent(long id);
+      void deactivateStudent(long id);
 
     Page<Student>  getAllStudent(Pageable pageable);
 
 
-    public  void changeRoom(long StudentId,  long roomId, int bedNumber);
+      void changeRoom(long StudentId,  long roomId, long bedNumber);
+
+    Student findStudentByParent(String email, String tc);
+
+    void makeStudentQuest(long id);
 
 
 
