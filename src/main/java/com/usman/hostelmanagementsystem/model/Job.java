@@ -29,6 +29,7 @@ public class Job extends  AbstractModel{
     private  Long id;
     private String name;
     private String description;
+    private Double salaryAmount;
 
     @ManyToMany
     @JoinTable(name = "job_staff", joinColumns = @JoinColumn(name = "job_id")

@@ -28,6 +28,9 @@ public class RoomServiceImpl implements RoomService {
     public void saveRoom(@Valid Room room, long hostelId) {
 
         Hostel hostel=hostelService.findById(hostelId);
+        if(roomRepository.findRoomByRoomNumberAndHostel(room.getRoomNumber(),hostel).isPresent()){
+            throw new BusinessException(HttpStatus.NOT_FOUND,"ROOM ALREADY EXIST");
+        }
         if(ObjectUtils.isEmpty(room.getRoomType())){
             throw new BusinessException(HttpStatus.NOT_FOUND,"ROOM TYPE MUST BE PROVIDED ");
         }
@@ -61,8 +64,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room findRoomByRoomNumber(String roomNumber) {
-        return roomRepository.findRoomByRoomNumber(roomNumber)
+    public Room findRoomByRoomNumberAndHostel(String roomNumber,long hostelId) {
+        Hostel hostel =hostelService.findById(hostelId);
+        return roomRepository.findRoomByRoomNumberAndHostel(roomNumber,hostel)
                 .orElseThrow(()->new BusinessException("ROOM NUMBER IS NOT IN OUR SYSTEM "+roomNumber));
     }
 

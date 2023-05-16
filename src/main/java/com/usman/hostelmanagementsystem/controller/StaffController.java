@@ -1,9 +1,9 @@
 package com.usman.hostelmanagementsystem.controller;
 
 import com.usman.hostelmanagementsystem.dto.ResponseDto;
-import com.usman.hostelmanagementsystem.dto.RoomDto;
+
 import com.usman.hostelmanagementsystem.dto.StaffDto;
-import com.usman.hostelmanagementsystem.dto.StudentDto;
+
 import com.usman.hostelmanagementsystem.mapper.StaffMapper;
 import com.usman.hostelmanagementsystem.service.StaffService;
 import lombok.AllArgsConstructor;
@@ -31,30 +31,30 @@ public class StaffController {
     }
 
     @PostMapping("/")
-    public  ResponseEntity<ResponseDto> saveStafff(@RequestBody StaffDto dto){
+    public  ResponseEntity<ResponseDto> saveStaff(@RequestBody StaffDto dto){
         service. registerStaff(mapper.toEntity(dto));
         return ResponseEntity.ok(ResponseDto.builder().message("staff saved").build());
     }
 
-    @PostMapping("/")
-    public  ResponseEntity<ResponseDto> updateStafff(@RequestBody StaffDto dto, long id){
+    @PutMapping("/")
+    public  ResponseEntity<ResponseDto> updateStaff(@RequestBody StaffDto dto, long id){
         service.  updateStaff(mapper.toEntity(dto),id);
         return ResponseEntity.ok(ResponseDto.builder().message("staff updated").build());
     }
 
     @GetMapping("/")
-    public ResponseEntity<Page<StaffDto>> getRoomIfAvailable(Pageable pageable){
+    public ResponseEntity<Page<StaffDto>> getAll(Pageable pageable){
         return ResponseEntity.ok(new PageImpl<>(mapper.toDto(service. getAllStaff(pageable).getContent())));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto> saveHostel( @PathVariable long id){
+    public ResponseEntity<ResponseDto> deleteStaff( @PathVariable long id){
         service. deleteStaff(id);
         return ResponseEntity.ok(ResponseDto.builder().message("staff deleted").build());
     }
 
     @GetMapping("/email/{email}/tc/{tc}")
-    public ResponseEntity<StaffDto> getstaffByEmailORTc(@PathVariable String email, @PathVariable BigInteger tc){
+    public ResponseEntity<StaffDto> getStaffByEmailORTc(@PathVariable String email, @PathVariable BigInteger tc){
         return ResponseEntity.ok(mapper.toDto(service. getByEmailOrTc(email,tc)));
     }
 

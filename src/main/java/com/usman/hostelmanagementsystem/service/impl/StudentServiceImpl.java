@@ -149,7 +149,7 @@ public class StudentServiceImpl implements StudentService {
         Student student=findStudentById(studentId);
         Room room=roomService.findById(roomId);
         Bed bed= bedService.findBedBYId(bedNumber);
-        if(bedService.bedOccupied()){
+        if(bed.isOccupied()){
             throw  new BusinessException("BED IS OCCUPIED CHOOSE NEW BED");
         }
         Room oldRoom=student.getRoom();

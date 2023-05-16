@@ -51,7 +51,7 @@ public class HostelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto> updateStudent(@RequestBody HostelDto dto, @PathVariable long id){
+    public ResponseEntity<ResponseDto> updateHostel(@RequestBody HostelDto dto, @PathVariable long id){
         service.updateHostel(mapper.toEntity(dto), id);
         return ResponseEntity.ok(ResponseDto.builder().message("updated saved").build());
     }

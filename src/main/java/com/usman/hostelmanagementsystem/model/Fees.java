@@ -10,7 +10,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Validated
 @Data
@@ -26,7 +26,10 @@ public class Fees  extends AbstractModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
-    private long studentId;
     private LocalDate monthAndYear;
     private Double amount;
+
+    @ManyToOne
+    private Student student;
+
 }

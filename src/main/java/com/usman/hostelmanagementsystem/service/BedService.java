@@ -17,5 +17,4 @@ public interface BedService {
 
     Page<Bed> getAllAlreadyBed(Pageable pageable);
 
-    boolean bedOccupied();
 }

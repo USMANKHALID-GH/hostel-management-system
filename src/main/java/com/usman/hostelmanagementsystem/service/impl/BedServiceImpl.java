@@ -81,8 +81,5 @@ public class BedServiceImpl  implements BedService {
         return new PageImpl<>(bed);
     }
 
-    @Override
-    public boolean bedOccupied() {
-        return bedRepository.existsBedsByOccupied(true);
-    }
+
 }

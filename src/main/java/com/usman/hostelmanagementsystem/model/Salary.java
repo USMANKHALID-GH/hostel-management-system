@@ -28,9 +28,12 @@ public class Salary extends  AbstractModel {
     private  Long Id;
 
     private  double  amount;
-    private  long staffId;
+
     private LocalDate monthAndYear;
 
     @ManyToMany
     private Set<Job> job;
+
+    @ManyToOne
+    private  Staff staff;
 }

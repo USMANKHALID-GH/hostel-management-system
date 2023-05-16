@@ -10,6 +10,7 @@ import org.hibernate.annotations.*;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 import jakarta.persistence.*;
@@ -65,5 +66,8 @@ public class Student extends AbstractModel {
 
     @OneToOne
     private Bed bed;
+
+    @OneToMany(mappedBy = "student")
+    private List<Fees> fees;
 
 }

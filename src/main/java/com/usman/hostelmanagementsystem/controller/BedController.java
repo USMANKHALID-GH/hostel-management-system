@@ -23,7 +23,7 @@ public class BedController {
     private final BedMapper mapper;
 
     @PostMapping("/room/{roomId}")
-    public ResponseEntity<ResponseDto> saveHostel(@RequestBody BedDto dto, @PathVariable long roomId){
+    public ResponseEntity<ResponseDto> saveBed(@RequestBody BedDto dto, @PathVariable long roomId){
         service.saveBed(mapper.toEntity(dto), roomId);
         return ResponseEntity.ok(ResponseDto.builder().message("Hostel saved").build());
     }
@@ -41,7 +41,7 @@ public class BedController {
 
 
     @GetMapping("/ready-bed")
-    public ResponseEntity<Page<BedDto>> getHostelByCity(Pageable pageable){
+    public ResponseEntity<Page<BedDto>> getAllReadyBed(Pageable pageable){
         return ResponseEntity.ok(new PageImpl<>(mapper.toDto(service.getAllAlreadyBed(pageable).getContent())));
     }
 

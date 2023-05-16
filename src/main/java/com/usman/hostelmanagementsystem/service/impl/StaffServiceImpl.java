@@ -75,7 +75,7 @@ public class StaffServiceImpl  implements StaffService {
         if(!room.isReady()){
             throw new BusinessException(HttpStatus.FORBIDDEN,"ROOM IS NOT READY YET");
         }
-        if(room.getRoomCapacity()<4){
+        if(room.getRoomCapacity()>4){
             throw new BusinessException(HttpStatus.FORBIDDEN,"ROOM IS FULL ");
         }
         Student student= studentService.findStudentById(studentId);

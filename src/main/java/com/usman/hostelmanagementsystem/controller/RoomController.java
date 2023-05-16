@@ -1,7 +1,6 @@
 package com.usman.hostelmanagementsystem.controller;
 
 
-import com.usman.hostelmanagementsystem.dto.HostelDto;
 import com.usman.hostelmanagementsystem.dto.ResponseDto;
 import com.usman.hostelmanagementsystem.dto.RoomDto;
 import com.usman.hostelmanagementsystem.mapper.RoomMapper;
@@ -42,9 +41,9 @@ public class RoomController {
         return ResponseEntity.ok(mapper.toDto(service.findById(id)));
     }
 
-    @GetMapping("/room-number/{roomNumber}")
-    public ResponseEntity<RoomDto> getRoomByNumber(@PathVariable String roomNumber){
-        return ResponseEntity.ok(mapper.toDto(service.findRoomByRoomNumber(roomNumber)));
+    @GetMapping("/room-number/{roomNumber}/hostel/{hostelId}")
+    public ResponseEntity<RoomDto> getRoomByNumber(@PathVariable String roomNumber,@PathVariable long hostelId){
+        return ResponseEntity.ok(mapper.toDto(service.findRoomByRoomNumberAndHostel(roomNumber ,hostelId)));
     }
 
     @PutMapping("/make-room-not-ready/{id}")

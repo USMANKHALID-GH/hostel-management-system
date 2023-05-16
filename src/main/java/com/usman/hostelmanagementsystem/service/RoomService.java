@@ -14,7 +14,7 @@ public interface RoomService {
 
     void setRoomReady(long id);
 
-    Room findRoomByRoomNumber(String roomNumber);
+    Room findRoomByRoomNumberAndHostel(String roomNumber,long  hostelId);
 
     void UpdateRoom(long id);
 

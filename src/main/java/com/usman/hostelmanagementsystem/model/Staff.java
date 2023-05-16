@@ -8,6 +8,7 @@ import org.hibernate.annotations.*;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 
 import jakarta.persistence.*;
@@ -58,4 +59,7 @@ public class Staff extends AbstractModel{
 
     @ManyToOne
     private  Hostel hostel;
+
+    @OneToMany(mappedBy = "staff")
+    private List<Salary> salary;
 }

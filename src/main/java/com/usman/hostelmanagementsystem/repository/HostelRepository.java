@@ -25,4 +25,6 @@ public interface HostelRepository  extends JpaRepository<Hostel, Long> {
 
 
 
+
+
 }

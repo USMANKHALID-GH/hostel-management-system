@@ -1,5 +1,6 @@
 package com.usman.hostelmanagementsystem.repository;
 
+import com.usman.hostelmanagementsystem.model.Hostel;
 import com.usman.hostelmanagementsystem.model.Room;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +18,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     Page<Room> findRoomIfReady(Pageable pageable);
 
     Optional<Room> findRoomByRoomNumber(String roomNumber);
+
+    Optional<Room>  findRoomByRoomNumberAndHostel(String roomNumber, Hostel hostel);
 
 }
