@@ -6,6 +6,7 @@ import com.usman.hostelmanagementsystem.dto.RoomDto;
 import com.usman.hostelmanagementsystem.mapper.RoomMapper;
 import com.usman.hostelmanagementsystem.service.RoomService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/api/room")
 public class RoomController {
+    @Autowired
     private final RoomService service;
+    @Autowired
     private final RoomMapper mapper;
 
     @PostMapping("/hostel/{hostelId}")
@@ -50,5 +53,11 @@ public class RoomController {
     public ResponseEntity<ResponseDto> updateRoom(@PathVariable("id") long id){
         service.UpdateRoom(id);
         return ResponseEntity.ok(ResponseDto.builder().message("Room updated").build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDto> deleteRoom( @PathVariable long id){
+        service.deleteRoom(id);
+        return ResponseEntity.ok(ResponseDto.builder().message("room deleted").build());
     }
 }

@@ -26,10 +26,10 @@ public class Salary extends  AbstractModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
-
+    @Column(nullable = false, updatable = false)
     private  double  amount;
 
-    private LocalDate monthAndYear;
+
 
     @ManyToMany
     private Set<Job> job;

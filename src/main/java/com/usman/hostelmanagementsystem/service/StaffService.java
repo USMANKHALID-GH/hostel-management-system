@@ -1,6 +1,6 @@
 package com.usman.hostelmanagementsystem.service;
 
-import com.usman.hostelmanagementsystem.dto.StaffDto;
+
 import com.usman.hostelmanagementsystem.model.Staff;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +25,8 @@ public interface StaffService {
     public  Staff getByEmailOrTc(String email, BigInteger tc);
 
     Staff getStaffById(long id);
+
+
 
 
 }

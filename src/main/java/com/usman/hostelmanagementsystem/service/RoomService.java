@@ -18,5 +18,7 @@ public interface RoomService {
 
     void UpdateRoom(long id);
 
+    void deleteRoom(long id);
+
 
 }

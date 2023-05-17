@@ -6,6 +6,7 @@ import com.usman.hostelmanagementsystem.dto.StudentDto;
 import com.usman.hostelmanagementsystem.mapper.HostelMapper;
 import com.usman.hostelmanagementsystem.service.HostelService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/hostel/")
 public class HostelController {
 
+    @Autowired
     private  final HostelService service;
+    @Autowired
     private  final HostelMapper mapper;
 
     @PostMapping("/")

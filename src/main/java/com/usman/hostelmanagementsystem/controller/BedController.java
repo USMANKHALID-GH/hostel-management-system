@@ -8,6 +8,7 @@ import com.usman.hostelmanagementsystem.dto.ResponseDto;
 import com.usman.hostelmanagementsystem.mapper.BedMapper;
 import com.usman.hostelmanagementsystem.service.BedService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/bed")
 public class BedController {
 
+    @Autowired
     private final BedService service;
+    @Autowired
     private final BedMapper mapper;
 
     @PostMapping("/room/{roomId}")

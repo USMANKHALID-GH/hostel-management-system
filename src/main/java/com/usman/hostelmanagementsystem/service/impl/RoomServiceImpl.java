@@ -1,6 +1,7 @@
 package com.usman.hostelmanagementsystem.service.impl;
 
 import com.usman.hostelmanagementsystem.exception.BusinessException;
+import com.usman.hostelmanagementsystem.model.Bed;
 import com.usman.hostelmanagementsystem.model.Hostel;
 import com.usman.hostelmanagementsystem.model.Room;
 import com.usman.hostelmanagementsystem.repository.RoomRepository;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -81,5 +84,17 @@ public class RoomServiceImpl implements RoomService {
 
 
 
+    }
+
+    @Override
+    public void deleteRoom(long id) {
+        Room room=findById(id);
+        List<Bed>  beds= room.getBed();
+      for(Bed bed: beds){
+          if(bed.isOccupied()){
+              throw  new BusinessException("CANT DELETE ROOM BECAUSE THERE STUDENTS THERE");
+          }
+      }
+        roomRepository.delete(room);
     }
 }

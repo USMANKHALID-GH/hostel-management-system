@@ -3,10 +3,7 @@ package com.usman.hostelmanagementsystem.service.impl;
 
 import com.usman.hostelmanagementsystem.dto.ResponseDto;
 import com.usman.hostelmanagementsystem.exception.BusinessException;
-import com.usman.hostelmanagementsystem.model.Bed;
-import com.usman.hostelmanagementsystem.model.Room;
-import com.usman.hostelmanagementsystem.model.Staff;
-import com.usman.hostelmanagementsystem.model.Student;
+import com.usman.hostelmanagementsystem.model.*;
 import com.usman.hostelmanagementsystem.repository.RoomRepository;
 import com.usman.hostelmanagementsystem.repository.StaffRepository;
 import com.usman.hostelmanagementsystem.repository.StudentRepository;
@@ -22,8 +19,10 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 
 
 @Service
@@ -80,12 +79,14 @@ public class StaffServiceImpl  implements StaffService {
         }
         Student student= studentService.findStudentById(studentId);
         if(room.getHostel().isMixed()|| (room.getHostel().getGender().equalsIgnoreCase(student.getGender()))){
+            String studentHostelId=generateId(studentId,room.getHostel());
             room.setRoomCapacity(room.getRoomCapacity()+1);
             bed.setOccupied(true);
             student.setBedNumber(bed.getBedNumber());
             student.setActive(true);
             student.setRoom(room);
             student.setBed(bed);
+            student.setHostelId(studentHostelId);
             roomRepository.save(room);
             studentRepository.save(student);
         }
@@ -96,6 +97,7 @@ public class StaffServiceImpl  implements StaffService {
 
 
     }
+
 
     @Override
     public void updateStaff(Staff staff,long id) {
@@ -158,5 +160,14 @@ public class StaffServiceImpl  implements StaffService {
     public Staff getStaffById(long id) {
         return staffRepository.findById(id)
                 .orElseThrow(()->new BusinessException(HttpStatus.NOT_FOUND,"STAFF ID IS NOT IN OUR SYSTEM "+id));
+    }
+
+
+    private String generateId(long studentId, Hostel hostel){
+        String id="";
+        int year=LocalDate.now().getYear();
+        Student student=studentService.findStudentById(studentId);
+        id+=year+student.getFirstName().charAt(0)+student.getSurname().charAt(0)+hostel.getName().substring(0,2)+studentId;
+        return id;
     }
 }

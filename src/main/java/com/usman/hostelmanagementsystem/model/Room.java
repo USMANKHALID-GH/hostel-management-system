@@ -34,6 +34,7 @@ public class Room extends AbstractModel{
 
     private  Integer floorNumber;
 
+    @Column(nullable = false)
     private  String roomType;
 
     @ManyToOne

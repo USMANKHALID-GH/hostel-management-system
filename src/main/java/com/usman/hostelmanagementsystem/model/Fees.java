@@ -26,7 +26,7 @@ public class Fees  extends AbstractModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
-    private LocalDate monthAndYear;
+    @Column(nullable = false)
     private Double amount;
 
     @ManyToOne

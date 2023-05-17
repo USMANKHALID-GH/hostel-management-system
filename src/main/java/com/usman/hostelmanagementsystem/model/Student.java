@@ -4,6 +4,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
@@ -39,20 +40,26 @@ public class Student extends AbstractModel {
     private String firstName;
     @Column(nullable = false)
     private   String surname;
-    @Column(nullable = false,length = 11)
+    @Column(nullable = false,length = 11,unique = true)
     private String  tc;
+    @Column(nullable = false,unique = true)
     private String   studentNumber;
     private boolean isActive;
     private boolean isGuest;
     private String  image;
+    @Column(nullable = false, unique = true)
     private  String   telefon;
     @Email
+    @Column(nullable = false, unique = true)
     private   String email;
     private boolean isDisabled;
     private  String department;
     private String course;
+    @Column(nullable = false)
     private String  gender;
     private LocalDate dateOfBirth;
+    @Column(length = 11,unique = true, updatable = false)
+    private String hostelId;
 
 
     @ManyToOne

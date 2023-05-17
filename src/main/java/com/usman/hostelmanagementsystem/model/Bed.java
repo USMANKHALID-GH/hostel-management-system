@@ -21,7 +21,7 @@ import org.hibernate.annotations.SQLDelete;
 public class Bed extends AbstractModel{
     private static final long serialVersionUID = 1L;
 
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
     @Column(nullable = false)

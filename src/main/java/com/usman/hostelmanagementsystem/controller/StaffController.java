@@ -7,6 +7,7 @@ import com.usman.hostelmanagementsystem.dto.StaffDto;
 import com.usman.hostelmanagementsystem.mapper.StaffMapper;
 import com.usman.hostelmanagementsystem.service.StaffService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +20,9 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @RequestMapping("/api/staff")
 public class StaffController {
-
+    @Autowired
     private final StaffService service;
+    @Autowired
     private final StaffMapper mapper;
 
 
