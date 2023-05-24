@@ -8,8 +8,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.validation.annotation.Validated;
-
-import java.time.LocalDate;
 import java.util.Set;
 
 @Validated
@@ -28,12 +26,10 @@ public class Salary extends  AbstractModel {
     private  Long Id;
     @Column(nullable = false, updatable = false)
     private  double  amount;
+    @OneToOne
+    private Job job;
 
+    @OneToOne
+    private Staff staff;
 
-
-    @ManyToMany
-    private Set<Job> job;
-
-    @ManyToOne
-    private  Staff staff;
 }
