@@ -5,6 +5,8 @@ import com.usman.hostelmanagementsystem.model.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface StudentService {
 
       void  register(Student register);
@@ -27,6 +29,8 @@ public interface StudentService {
     Student findStudentByParent(String email, String tc);
 
     void makeStudentQuest(long id);
+
+    List<Student> findStudentWhoHaventPaid(Pageable pageable);
 
 
 

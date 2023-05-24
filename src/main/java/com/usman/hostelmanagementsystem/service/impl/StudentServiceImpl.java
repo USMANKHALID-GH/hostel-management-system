@@ -2,44 +2,52 @@ package com.usman.hostelmanagementsystem.service.impl;
 
 
 import com.usman.hostelmanagementsystem.exception.BusinessException;
-import com.usman.hostelmanagementsystem.model.Bed;
-import com.usman.hostelmanagementsystem.model.Parent;
-import com.usman.hostelmanagementsystem.model.Room;
-import com.usman.hostelmanagementsystem.model.Student;
+import com.usman.hostelmanagementsystem.model.*;
 import com.usman.hostelmanagementsystem.repository.BedRepository;
 import com.usman.hostelmanagementsystem.repository.ParentRepository;
 import com.usman.hostelmanagementsystem.repository.RoomRepository;
 import com.usman.hostelmanagementsystem.repository.StudentRepository;
-import com.usman.hostelmanagementsystem.service.BedService;
-import com.usman.hostelmanagementsystem.service.RoomService;
-import com.usman.hostelmanagementsystem.service.StudentService;
+import com.usman.hostelmanagementsystem.service.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 
 import java.time.LocalDate;
 import java.time.Period;
-
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
 @Service
 @AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
-
+    @Autowired
     private final StudentRepository studentRepository;
+    @Autowired
     private final ParentRepository parentRepository;
+    @Autowired
     private  final RoomRepository roomRepository;
+    @Autowired
     private final BedRepository bedRepository;
+    @Autowired
     private final RoomService roomService;
+    @Autowired
     private final BedService bedService;
+    @Autowired
+    private  final FeesService  feesService;
+    @Autowired
+    private  final MessageService messageService;
 
 
     @Override
@@ -183,5 +191,42 @@ public class StudentServiceImpl implements StudentService {
         Student student=findStudentById(id);
         student.setGuest(true);
         studentRepository.save(student);
+    }
+
+//    @Override
+//    public List<Student> findStudentWhoHaventPaid(Pageable pageable) {
+//        return null;
+//    }
+
+
+    public List<Student>  findStudentWhoHaventPaid(Pageable pageable){
+        List<Student> paidStudent=feesService.getStudentFromFees()
+                .stream().map(fees->fees.getStudent())
+                .collect(Collectors.toList());
+        List<Student> allStudent=getAllStudent(pageable).getContent();
+        allStudent.removeAll(paidStudent);
+        return  allStudent;
+    }
+
+    @Scheduled(cron = "* * * 1 * *")
+    private void sendMessage(){
+        List<Student> students=findStudentWhoHaventPaid(Pageable.unpaged());
+        Message message= new Message();
+        message.setTitle("UNPAID FEES FOR THE MONTH");
+        message.setContent("paid by 10th or you your information will be deleted from the hostel");
+        message.setStudent(students);
+        messageService.sendMessage(message);
+
+    }
+    @Scheduled(cron = "0 59 23 10 * *")
+    private void deleteUnpaidStudent(){
+        List<Student> students=findStudentWhoHaventPaid(Pageable.unpaged());
+//        sms messages will be sent
+        List<Student> students1=students
+                .stream().filter(s->!s.isDisabled() || !s.isGuest()).collect(Collectors.toList());
+
+        studentRepository.deleteAll(students1);
+
+
     }
 }

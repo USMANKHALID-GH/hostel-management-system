@@ -74,7 +74,5 @@ public class Student extends AbstractModel {
     @OneToOne
     private Bed bed;
 
-    @OneToMany(mappedBy = "student")
-    private List<Fees> fees;
 
 }

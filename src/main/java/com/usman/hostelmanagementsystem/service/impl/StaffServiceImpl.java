@@ -13,6 +13,9 @@ import com.usman.hostelmanagementsystem.service.StaffService;
 import com.usman.hostelmanagementsystem.service.StudentService;
 import lombok.AllArgsConstructor;
 
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -28,12 +31,17 @@ import java.time.LocalDate;
 @Service
 @AllArgsConstructor
 public class StaffServiceImpl  implements StaffService {
-
+    @Autowired
     private final StaffRepository staffRepository;
+    @Autowired
     private final RoomService roomService;
+    @Autowired
     private  final StudentService studentService;
+    @Autowired
     private final StudentRepository studentRepository;
+    @Autowired
     private final RoomRepository roomRepository;
+    @Autowired
     private final BedService bedService;
 
     @Override
@@ -163,7 +171,7 @@ public class StaffServiceImpl  implements StaffService {
     }
 
 
-    private String generateId(long studentId, Hostel hostel){
+    private  String generateId(long studentId,  Hostel hostel){
         String id="";
         int year=LocalDate.now().getYear();
         Student student=studentService.findStudentById(studentId);

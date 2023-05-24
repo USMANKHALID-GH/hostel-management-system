@@ -60,6 +60,5 @@ public class Staff extends AbstractModel{
     @ManyToOne
     private  Hostel hostel;
 
-    @OneToMany(mappedBy = "staff")
-    private List<Salary> salary;
+
 }
