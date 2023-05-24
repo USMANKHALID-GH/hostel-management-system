@@ -9,7 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDate;
+
 
 
 @Validated
@@ -20,7 +20,6 @@ import java.time.LocalDate;
 @DynamicInsert
 @DynamicUpdate
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-
 @Table(name = "fees")
 public class Fees  extends AbstractModel{
     @Id
@@ -29,7 +28,7 @@ public class Fees  extends AbstractModel{
     @Column(nullable = false)
     private Double amount;
 
-    @ManyToOne
+    @OneToOne
     private Student student;
 
 }

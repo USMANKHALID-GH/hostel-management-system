@@ -8,6 +8,7 @@ import com.usman.hostelmanagementsystem.repository.BedRepository;
 import com.usman.hostelmanagementsystem.service.BedService;
 import com.usman.hostelmanagementsystem.service.RoomService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BedServiceImpl  implements BedService {
 
+    @Autowired
     private  final BedRepository bedRepository;
+    @Autowired
     private final RoomService roomService;
 
     @Override
