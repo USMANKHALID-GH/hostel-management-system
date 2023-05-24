@@ -10,6 +10,7 @@ import com.usman.hostelmanagementsystem.service.HostelService;
 import com.usman.hostelmanagementsystem.service.RoomService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,11 @@ import java.util.List;
 @AllArgsConstructor
 
 public class RoomServiceImpl implements RoomService {
-
+    @Autowired
     private final RoomRepository roomRepository;
+    @Autowired
     private  final HostelService hostelService;
+    @Autowired
     private  final StudentRepository studentRepository;
 
     @Override

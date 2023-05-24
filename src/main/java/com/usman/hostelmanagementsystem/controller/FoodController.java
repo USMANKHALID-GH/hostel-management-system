@@ -5,6 +5,7 @@ import com.usman.hostelmanagementsystem.dto.ResponseDto;
 import com.usman.hostelmanagementsystem.model.Food;
 import com.usman.hostelmanagementsystem.service.FoodService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/food")
 public class FoodController {
 
+    @Autowired
     private FoodService foodService;
 
     @PostMapping("/")

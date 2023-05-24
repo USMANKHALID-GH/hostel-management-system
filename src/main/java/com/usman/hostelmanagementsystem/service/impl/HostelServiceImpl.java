@@ -7,6 +7,7 @@ import com.usman.hostelmanagementsystem.service.HostelService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.util.ObjectUtils;
 @Service
 @AllArgsConstructor
 public class HostelServiceImpl  implements HostelService {
-
+    @Autowired
     private final HostelRepository hostelRepository;
 
     @Override

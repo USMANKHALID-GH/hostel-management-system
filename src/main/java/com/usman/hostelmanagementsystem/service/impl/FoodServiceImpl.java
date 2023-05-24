@@ -9,6 +9,7 @@ import com.usman.hostelmanagementsystem.repository.FoodRepository;
 import com.usman.hostelmanagementsystem.service.FoodService;
 import com.usman.hostelmanagementsystem.service.StaffService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -17,7 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class FoodServiceImpl implements FoodService {
+    @Autowired
     private  final StaffService staffService;
+    @Autowired
     private  final FoodRepository foodRepository;
 
     @Override
