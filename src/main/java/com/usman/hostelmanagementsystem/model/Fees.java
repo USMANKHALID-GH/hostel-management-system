@@ -32,3 +32,5 @@ public class Fees  extends AbstractModel{
     private Student student;
 
 }
+
+// combine

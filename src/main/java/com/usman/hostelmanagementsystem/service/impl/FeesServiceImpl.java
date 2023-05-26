@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 public class FeesServiceImpl implements FeesService {
     @Autowired
     private  final FeesRepository feesRepository;
-    @Autowired
-    private StudentService studentService;
+//    @Autowired
+//    private StudentService studentService;
 
 
 
