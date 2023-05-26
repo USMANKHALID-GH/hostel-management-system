@@ -1,7 +1,7 @@
 package com.usman.hostelmanagementsystem.service.impl;
 import com.usman.hostelmanagementsystem.exception.BusinessException;
 import com.usman.hostelmanagementsystem.model.Job;
-import com.usman.hostelmanagementsystem.model.Message;
+import com.usman.hostelmanagementsystem.model.Messages;
 import com.usman.hostelmanagementsystem.model.Salary;
 import com.usman.hostelmanagementsystem.model.Staff;
 import com.usman.hostelmanagementsystem.repository.SalaryRepository;
@@ -57,11 +57,12 @@ public class SalaryServiceImpl implements SalaryService {
 
      staff.removeAll(list.stream().map(s->s.getStaff()).collect(Collectors.toList()));
 
-     Message message= new Message();
+     Messages message= new Messages();
       message.setContent("YOUR SALARY WILL BE PAID VERY SOON");
       message.setStaff(staff);
       messageService.sendMessage(message);
 
+//      query mantikli
    }
 
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Message {
+public class Messages {
     private static final long serialVersionUID = 1L;
 
     @Id

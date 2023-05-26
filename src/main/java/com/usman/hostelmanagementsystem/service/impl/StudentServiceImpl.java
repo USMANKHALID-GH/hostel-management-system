@@ -1,6 +1,9 @@
 package com.usman.hostelmanagementsystem.service.impl;
 
 
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+import com.usman.hostelmanagementsystem.config.TwilioConfig;
 import com.usman.hostelmanagementsystem.exception.BusinessException;
 import com.usman.hostelmanagementsystem.model.*;
 import com.usman.hostelmanagementsystem.repository.BedRepository;
@@ -48,6 +51,8 @@ public class StudentServiceImpl implements StudentService {
     private  final FeesService  feesService;
     @Autowired
     private  final MessageService messageService;
+    @Autowired
+    private final TwilioConfig twilioConfig;
 
 
     @Override
@@ -203,7 +208,10 @@ public class StudentServiceImpl implements StudentService {
         List<Student> paidStudent=feesService.getStudentFromFees()
                 .stream().map(fees->fees.getStudent())
                 .collect(Collectors.toList());
+
         List<Student> allStudent=getAllStudent(pageable).getContent();
+
+
         allStudent.removeAll(paidStudent);
         return  allStudent;
     }
@@ -211,7 +219,7 @@ public class StudentServiceImpl implements StudentService {
     @Scheduled(cron = "* * * 1 * *")
     private void sendMessage(){
         List<Student> students=findStudentWhoHaventPaid(Pageable.unpaged());
-        Message message= new Message();
+        Messages message= new Messages();
         message.setTitle("UNPAID FEES FOR THE MONTH");
         message.setContent("paid by 10th or you your information will be deleted from the hostel");
         message.setStudent(students);
@@ -221,12 +229,34 @@ public class StudentServiceImpl implements StudentService {
     @Scheduled(cron = "0 59 23 10 * *")
     private void deleteUnpaidStudent(){
         List<Student> students=findStudentWhoHaventPaid(Pageable.unpaged());
+        PhoneNumber to= new PhoneNumber("+905550754423");
+        PhoneNumber from = new PhoneNumber(twilioConfig.getTrialNumber());
+        String  body="your account is delete for not paying your monthly fees";
+        Message message = Message.
+                creator(
+                        to,
+                        from,
+                        "your account is delete for not paying your monthly fees")
+                .create();
+
+
+
 //        sms messages will be sent
         List<Student> students1=students
                 .stream().filter(s->!s.isDisabled() || !s.isGuest()).collect(Collectors.toList());
+//        for(Student student:students1){
+//            Message.
+//                    creator(
+//                            student.getTelefon(),
+//                            from,
+//                            "your account is delete for not paying your monthly fees")
+//                    .create();
+//        }
 
         studentRepository.deleteAll(students1);
 
 
     }
+
+
 }

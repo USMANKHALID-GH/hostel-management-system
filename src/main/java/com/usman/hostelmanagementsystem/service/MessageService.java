@@ -1,7 +1,7 @@
 package com.usman.hostelmanagementsystem.service;
 
-import com.usman.hostelmanagementsystem.model.Message;
+import com.usman.hostelmanagementsystem.model.Messages;
 
 public interface MessageService {
-    void sendMessage(Message message);
+    void sendMessage(Messages message);
 }
